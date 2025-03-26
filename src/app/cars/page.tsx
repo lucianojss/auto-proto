@@ -12,12 +12,11 @@ import {
   PaginationNext,
 } from "@/components/ui/pagination";
 import { APP_ROUTES } from "@/lib/routes";
-import { generateCarSlug } from "@/utils/slugs";
+
+type searchParams = Promise<{ page?: string }>;
 
 interface HomePageProps {
-  searchParams: {
-    page?: string;
-  };
+  searchParams: searchParams;
 }
 
 export async function generateMetadata(): Promise<{

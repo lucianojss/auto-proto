@@ -3,13 +3,10 @@ import { notFound } from "next/navigation";
 import { getCarIdFromSlug } from "@/utils/slugs";
 import { Metadata } from "next";
 import { CarDetailContent } from "@/components/car-detail-content";
-import { HomeIcon, Link } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
+type Params = Promise<{ slug: string }>;
 interface CarDetailPageProps {
-  params: {
-    slug: string;
-  };
+  params: Params;
 }
 
 export async function generateMetadata({
