@@ -24,7 +24,7 @@ export async function generateMetadata({
     title: `AutoSearch | ${title}`,
     description: `${description}`,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/cars/${slug}`,
     },
     robots: {
       index: true,
@@ -39,6 +39,7 @@ export async function generateMetadata({
       description: description,
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
       siteName: "AutoSearch",
+      locale: "en_US",
       images: [
         {
           url: car.images[0],
