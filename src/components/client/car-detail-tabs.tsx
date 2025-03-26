@@ -21,7 +21,7 @@ export function CarDetailTabs({ car }: CarDetailTabsProps) {
       </TabsList>
       <TabsContent value="overview" className="space-y-4 pt-4">
         <div className="grid gap-4">
-          <p>{car.description}</p>
+          <div className="text-base">{car.description}</div>
           <div className="grid gap-2">
             <h3 className="font-semibold">Equipment and details</h3>
             <div className="flex flex-wrap gap-2">

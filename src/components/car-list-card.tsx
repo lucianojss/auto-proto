@@ -6,23 +6,18 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
 import { ExternalLink, Heart, MapPin, TrendingDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PriceRatingIndicator } from "@/components/price-rating-indicator";
 import type { CarData } from "@/data/cars";
+import { APP_ROUTES } from "@/lib/routes";
 import { generateCarSlug } from "@/utils/slugs";
 
 interface ListViewCardProps {
   car: CarData;
 }
 
-// Mini-components for the card
 const CarImage = ({ car }: { car: CarData }) => (
   <div className="relative md:w-1/3">
     <div className="relative aspect-[4/3] md:aspect-auto md:h-full">
@@ -102,33 +97,38 @@ const FeatureBadges = ({ features }: { features: string[] }) => (
 );
 
 export function ListViewCard({ car }: ListViewCardProps) {
-  const carSlug = generateCarSlug(car);
+  const url = `${APP_ROUTES.CARS}/${generateCarSlug(car)}`;
 
   return (
     <Card className="p-0 overflow-hidden transition-all duration-200 hover:scale-[1.02] hover:shadow-lg">
       <div className="flex flex-col md:flex-row">
         <CarImage car={car} />
         <div className="flex-1 flex flex-col">
-          <CardHeader className="p-4 md:p-6 pb-0">
-            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-              <CarInfo car={car} />
-              <PriceInfo car={car} />
-            </div>
-          </CardHeader>
+          <Link key={car.id} href={url}>
+            <CardHeader className="p-4 md:p-6 pb-0">
+              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <CarInfo car={car} />
+                <PriceInfo car={car} />
+              </div>
+            </CardHeader>
 
-          <CardContent>
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {car.description}
-            </p>
-            <div className="mt-4">
-              <FeatureBadges features={car.features} />
-            </div>
-          </CardContent>
-
+            <CardContent>
+              <p className="text-sm text-muted-foreground line-clamp-2">
+                {car.description}
+              </p>
+              <div className="mt-4">
+                <FeatureBadges features={car.features} />
+              </div>
+            </CardContent>
+          </Link>
           <CardFooter className="p-2 flex justify-end">
-            <Link href={`/cars/${carSlug}`} className="">
+            <Link
+              href={car.dealerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button variant="link">
-                <ExternalLink /> {car.dealer}
+                <ExternalLink /> Visit {car.dealer}
               </Button>
             </Link>
           </CardFooter>

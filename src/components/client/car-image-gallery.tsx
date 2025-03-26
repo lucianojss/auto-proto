@@ -4,7 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface CarImageGalleryProps {
   images: string[];
@@ -72,10 +72,11 @@ export function CarImageGallery({ images, make, model }: CarImageGalleryProps) {
           {images.map((image, index) => (
             <button
               key={index}
-              className={`relative w-16 h-12 rounded overflow-hidden border-2 ${index === currentImageIndex
+              className={`relative w-16 h-12 rounded overflow-hidden border-2 ${
+                index === currentImageIndex
                   ? "border-primary"
                   : "border-transparent"
-                }`}
+              }`}
               onClick={() => setCurrentImageIndex(index)}
             >
               <Image

@@ -18,6 +18,7 @@ export interface CarData {
   monthlyPayment: number;
   location: string;
   dealer: string;
+  dealerUrl: string;
   priceRating: PriceRating;
   description: string;
   features: string[];
@@ -74,14 +75,14 @@ function generateCarData(): CarData[] {
     "Liverpool",
   ];
   const dealers = [
-    "Premium Auto",
-    "City Motors",
-    "Highway Cars",
-    "Elite Vehicles",
-    "AutoNation",
-    "Car Kingdom",
-    "Drive Time",
-    "Motor World",
+    { name: "Premium Auto", url: "https://premiumauto.example.com" },
+    { name: "City Motors", url: "https://citymotors.example.com" },
+    { name: "Highway Cars", url: "https://highwaycars.example.com" },
+    { name: "Elite Vehicles", url: "https://elitevehicles.example.com" },
+    { name: "AutoNation", url: "https://autonation.example.com" },
+    { name: "Car Kingdom", url: "https://carkingdom.example.com" },
+    { name: "Drive Time", url: "https://drivetime.example.com" },
+    { name: "Motor World", url: "https://motorworld.example.com" },
   ];
   const priceRatings: PriceRating[] = [
     "super",
@@ -212,6 +213,8 @@ function generateCarData(): CarData[] {
         : "SE";
     const variant = `${engineSize} ${trimLevel} ${doors}dr`;
 
+    const dealer = dealers[i % dealers.length];
+
     return {
       id: i + 1,
       make,
@@ -224,7 +227,8 @@ function generateCarData(): CarData[] {
       price,
       monthlyPayment: Math.round(price / 48),
       location: locations[i % locations.length],
-      dealer: dealers[i % dealers.length],
+      dealer: dealer.name,
+      dealerUrl: dealer.url,
       priceRating: priceRatings[i % priceRatings.length],
       description: `This ${make} ${model} is in excellent condition with full service history. It comes with ${carFeatures.join(
         ", "

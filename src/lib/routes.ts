@@ -1,4 +1,4 @@
-export enum AppRoutes {
+export enum APP_ROUTES {
   HOME = "/",
   CARS = "/cars",
 }

@@ -7,24 +7,75 @@ import {
   ExternalLink,
   Flag,
   Fuel,
-  Heart,
   Info,
   MapPin,
   Share2,
   ShieldCheck,
   Tag,
 } from "lucide-react";
-import Link from "next/link";
+
 import { CarDetailTabs } from "@/components/client/car-detail-tabs";
 import { PriceRatingIndicator } from "@/components/price-rating-indicator";
-import { getCarById } from "@/data/cars";
+import { CarData, getCarById } from "@/data/cars";
 import { notFound } from "next/navigation";
 import { CarImageGallery } from "@/components/client/car-image-gallery";
 import { getCarIdFromSlug } from "@/utils/slugs";
+import { Metadata } from "next";
+import Link from "next/link";
+import { ShareButton } from "@/components/client/share-button";
 
 interface CarDetailPageProps {
   params: {
     slug: string;
+  };
+}
+
+export async function generateMetadata({
+  params,
+}: CarDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  const carId = getCarIdFromSlug(slug);
+  const car = (await getCarById(carId)) as CarData;
+
+  const title = `${car.make} ${car.model} in ${car.location}`;
+  const description = `Car details ${car.make} ${car.model} ${car.variant} ${car.fuelType} in ${car.location}.`;
+
+  return {
+    title: `AutoSearch | ${title}`,
+    description: `${description}`,
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
+    openGraph: {
+      title: title,
+      description: description,
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${slug}`,
+      siteName: "AutoSearch",
+      images: [
+        {
+          url: car.images[0],
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: car.images[0],
+    },
   };
 }
 
@@ -55,10 +106,6 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
               <span className="text-muted-foreground">{car.location}</span>
             </div>
           </div>
-          <Button variant="outline" className="md:self-start">
-            <Heart className="mr-2 h-4 w-4" />
-            Save car
-          </Button>
         </div>
 
         {/* Main content */}
@@ -92,21 +139,19 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
                     </div>
                   </div>
                 </div>
-                <Info className="h-5 w-5 text-muted-foreground" />
               </div>
               <div className="flex items-center gap-2">
                 <PriceRatingIndicator rating={car.priceRating} />
               </div>
               <div className="text-3xl font-bold">
-                £{car.price.toLocaleString()}
+                € {car.price.toLocaleString()}
               </div>
-              <Button className="w-full">
-                <ExternalLink className="mr-2 h-4 w-4" />
-                See all details
-              </Button>
-              <div className="text-sm text-muted-foreground text-center">
-                Found on {car.otherSites} other sites
-              </div>
+              <Link href={car.dealerUrl}>
+                <Button className="w-full">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  See all details
+                </Button>
+              </Link>
             </div>
 
             {/* Seller info */}
@@ -187,18 +232,9 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
 
             {/* Action buttons */}
             <div className="grid gap-2">
-              <Button variant="outline" className="w-full justify-start">
-                <Flag className="mr-2 h-4 w-4" />
-                Report Error
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Tag className="mr-2 h-4 w-4" />
-                Car valuation
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Share2 className="mr-2 h-4 w-4" />
-                Share
-              </Button>
+              <ShareButton
+                url={`${process.env.NEXT_PUBLIC_SITE_URL}/cars/${slug}`}
+              />
             </div>
           </div>
         </div>

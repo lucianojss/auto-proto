@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Car, ArrowLeft } from "lucide-react";
+import { APP_ROUTES } from "@/lib/routes";
 
 export default function NotFound() {
   return (
@@ -12,11 +13,12 @@ export default function NotFound() {
         <div className="space-y-2">
           <h1 className="text-3xl font-bold tracking-tighter">Car Not Found</h1>
           <p className="text-muted-foreground">
-            Sorry, we couldn&apos;t find the car you&apos;re looking for. It may have been sold or removed.
+            Sorry, we couldn't find car you are looking for. It may have been
+            sold or removed.
           </p>
         </div>
         <Button asChild>
-          <Link href="/">
+          <Link href={APP_ROUTES.CARS}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Car Search
           </Link>
