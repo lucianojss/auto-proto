@@ -73,3 +73,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Ensure toasts appear above all other elements */
+.toaster-container {
+  z-index: 9999 !important;
+}
+
+/* For the toast elements themselves */
+.sonner-toast {
+  background-color: rgba(255, 255, 255, 0.9) !important; /* Adjust opacity as needed */
+  backdrop-filter: blur(4px);
+  z-index: 9999 !important;
+}
+
+/* Dark mode support */
+.dark .sonner-toast {
+  background-color: rgba(40, 40, 40, 0.9) !important; /* Adjust opacity as needed */
+}

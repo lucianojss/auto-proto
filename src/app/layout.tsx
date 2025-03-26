@@ -34,7 +34,11 @@ export default function RootLayout({
             {modal}
             {children}
           </SiteLayout>
-          <Toaster position={"bottom-left"} closeButton />
+          <Toaster
+            position={"bottom-left"}
+            closeButton
+            className="toaster-container"
+          />
         </ThemeProvider>
       </body>
     </html>
