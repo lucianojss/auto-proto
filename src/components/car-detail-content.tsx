@@ -30,7 +30,6 @@ export function CarDetailContent({
   isModal = false,
 }: CarDetailContentProps) {
   // Adjust classes based on whether component is used in modal or page
-  const containerClasses = isModal ? "p-4" : "container py-6 md:py-12";
   const gridLayoutClasses = isModal
     ? "grid gap-6 md:grid-cols-1"
     : "grid md:grid-cols-[1.5fr_1fr] gap-6";
@@ -175,9 +174,7 @@ export function CarDetailContent({
 
           {/* Action buttons */}
           <div className="grid gap-2">
-            <ShareButton
-              url={`${process.env.NEXT_PUBLIC_SITE_URL}/cars/${slug}`}
-            />
+            <ShareButton slug={slug} />
           </div>
         </div>
       </div>

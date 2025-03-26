@@ -6,10 +6,10 @@ import { toast } from "sonner";
 import { useState } from "react";
 
 interface ShareButtonProps {
-  url: string;
+  slug: string;
 }
 
-export function ShareButton({ url }: ShareButtonProps) {
+export function ShareButton({ slug }: ShareButtonProps) {
   const [copying, setCopying] = useState(false);
 
   const handleShare = async () => {
@@ -17,7 +17,9 @@ export function ShareButton({ url }: ShareButtonProps) {
 
     try {
       // Fallback to clipboard copy
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(
+        `${window.location.origin}/cars/${slug}`
+      );
       toast.success("Link copied to clipboard");
     } catch (error) {
       toast.error("Failed to share");

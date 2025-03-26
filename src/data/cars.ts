@@ -75,14 +75,14 @@ function generateCarData(): CarData[] {
     "Liverpool",
   ];
   const dealers = [
-    { name: "Premium Auto", url: "https://premiumauto.example.com" },
-    { name: "City Motors", url: "https://citymotors.example.com" },
-    { name: "Highway Cars", url: "https://highwaycars.example.com" },
-    { name: "Elite Vehicles", url: "https://elitevehicles.example.com" },
-    { name: "AutoNation", url: "https://autonation.example.com" },
-    { name: "Car Kingdom", url: "https://carkingdom.example.com" },
-    { name: "Drive Time", url: "https://drivetime.example.com" },
-    { name: "Motor World", url: "https://motorworld.example.com" },
+    { name: "Premium Auto", url: "https://www.autouncle.com/" },
+    { name: "City Motors", url: "https://www.autouncle.com/" },
+    { name: "Highway Cars", url: "https://www.autouncle.com/" },
+    { name: "Elite Vehicles", url: "https://www.autouncle.com/" },
+    { name: "AutoNation", url: "https://www.autouncle.com/" },
+    { name: "Car Kingdom", url: "https://www.autouncle.com/" },
+    { name: "Drive Time", url: "https://www.autouncle.com/" },
+    { name: "Motor World", url: "https://www.autouncle.com/" },
   ];
   const priceRatings: PriceRating[] = [
     "super",
