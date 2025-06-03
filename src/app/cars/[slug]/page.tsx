@@ -4,11 +4,28 @@ import { getCarIdFromSlug } from "@/utils/slugs";
 import { Metadata } from "next";
 import { CarDetailContent } from "@/components/car-detail-content";
 
+/**
+ * Params type for the car detail page.
+ * This is a Promise that resolves to an object containing the slug.
+ */
 type Params = Promise<{ slug: string }>;
+
+/**
+ * Props for the CarDetailPage component.
+ */
 interface CarDetailPageProps {
   params: Params;
 }
 
+/**
+ * Generates metadata on the server side for the car detail page.
+ * This function fetches the car data based on the slug from the URL,
+ * constructs the title and description, and returns a Metadata object
+ * that includes Open Graph and Twitter card information.
+ * @param param0 - The parameters object containing the slug.
+ *
+ * @returns {Promise<Metadata>}
+ */
 export async function generateMetadata({
   params,
 }: CarDetailPageProps): Promise<Metadata> {
@@ -59,6 +76,14 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * CarDetailPage component that renders the details of a specific car.
+ * It fetches the car data based on the slug from the URL parameters,
+ * and displays the car details using the CarDetailContent component.
+ *
+ * @param param0
+ * @returns
+ */
 export default async function CarDetailPage({ params }: CarDetailPageProps) {
   const { slug } = await params;
 
