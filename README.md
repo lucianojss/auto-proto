@@ -20,6 +20,12 @@ The usage of Next.js is to amplify the usage of server components for faster ren
 - 🧭 **Breadcrumb Navigation**: Seamless navigation throughout the app.
 - ⏳ **Loading Skeletons**: Smooth loading experience with skeleton components.
 
+## Project Routes
+
+- `/` - Landing page route
+- `/cars` - Cars Listing page
+- `/cars/[slug]` - Car details page by slug
+
 ## Tech Stack
 
 - [Next.js](https://nextjs.org/)
