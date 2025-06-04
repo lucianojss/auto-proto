@@ -3,6 +3,8 @@
 This is a demo app to demonstrate car listing web application built with Next.js, TypeScript, and Tailwind CSS.
 The usage of Next.js is to amplify the usage of server components for faster rendering and routing capabilities optimizing SEO.
 
+⚠️ The web application is using fake static data that might be not consistent. ex: car images not matching the brand/model. The static data is simply for demo purposes.
+
 ## Demo Features
 
 - 🚗 **Simple Car Listing**: Browse a curated list of cars with detailed information and images.
