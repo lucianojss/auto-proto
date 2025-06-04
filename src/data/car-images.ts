@@ -12,7 +12,6 @@ export const carImages: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?q=80&w=2070&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1520050206274-a1ae44613e6d?q=80&w=2070&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1549399542-7e8f2e928464?q=80&w=2070&auto=format&fit=crop",
   ],
   "Ford Focus": [
     "https://images.unsplash.com/photo-1551830820-330a71b99659?q=80&w=2070&auto=format&fit=crop",
@@ -64,11 +63,10 @@ export const carImages: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?q=80&w=2072&auto=format&fit=crop",
   ],
-}
+};
 
 // Function to get images for a specific car
 export function getCarImages(make: string, model: string): string[] {
-  const key = `${make} ${model}`
-  return carImages[key] || carImages["default"]
+  const key = `${make} ${model}`;
+  return carImages[key] || carImages["default"];
 }
-

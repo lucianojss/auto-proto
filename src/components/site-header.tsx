@@ -14,7 +14,7 @@ export function SiteHeader() {
             href={APP_ROUTES.CARS}
             className="transition-colors hover:text-foreground/80"
           >
-            List of cars
+            All Used Cars
           </Link>
         </nav>
         <div className="ml-auto flex items-center space-x-4">
