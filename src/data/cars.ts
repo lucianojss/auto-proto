@@ -1,3 +1,5 @@
+import "server-only";
+
 import { getCarImages } from "./car-images";
 import { getRandomInteriorImage } from "./car-interior-images";
 
@@ -310,48 +312,14 @@ export const uniqueMakes = Array.from(
   new Set(cars.map((car) => car.make))
 ).sort();
 
-export async function getCarsByMake(make: string): Promise<CarData[]> {
-  return new Promise((resolve) => {
-    const delay = Math.random() * 1000;
-    setTimeout(() => {
-      resolve(
-        cars.filter((car) => car.make.toLowerCase() === make.toLowerCase())
-      );
-    }, delay);
-  });
-}
-
-// get car by id from the cars data
+/**
+ * Fetches car data by ID.
+ * This function simulates db fetch
+ * @param id - The ID of the car to fetch.
+ * @returns {Promise<CarData | undefined>} - A promise that resolves to the car data if found, or undefined.
+ */
 export async function getCarById(id: number): Promise<CarData | undefined> {
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(cars.find((car) => car.id === id));
-    }, 1000);
-  });
-}
-
-export async function getCarByBrand(brand: string): Promise<CarData[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(cars.filter((car) => car.make === brand));
-    }, 1000);
-  });
-}
-
-// get car by model from the cars data
-export async function getCarByBrandAndModel(
-  brand: string,
-  model: string
-): Promise<CarData[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        cars.filter(
-          (car) =>
-            car.make.toLowerCase() === brand.toLowerCase() &&
-            car.model.toLowerCase() === model.toLowerCase()
-        )
-      );
-    }, 1000);
+    resolve(cars.find((car) => car.id === id));
   });
 }

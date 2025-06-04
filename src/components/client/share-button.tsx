@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
+import { APP_ROUTES } from "@/lib/routes";
 
 interface ShareButtonProps {
   slug: string;
@@ -18,7 +19,7 @@ export function ShareButton({ slug }: ShareButtonProps) {
     try {
       // Fallback to clipboard copy
       await navigator.clipboard.writeText(
-        `${window.location.origin}/cars/${slug}`
+        `${window.location.origin}${APP_ROUTES.CARS}/${slug}`
       );
       toast.success("Link copied to clipboard");
     } catch (error) {

@@ -6,17 +6,13 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { ExternalLink, Heart, MapPin, TrendingDown } from "lucide-react";
+import { ExternalLink, MapPin, TrendingDown } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { PriceRatingIndicator } from "@/components/price-rating-indicator";
 import type { CarData } from "@/data/cars";
 import { APP_ROUTES } from "@/lib/routes";
 import { generateCarSlug } from "@/utils/slugs";
-
-interface ListViewCardProps {
-  car: CarData;
-}
 
 const CarImage = ({ car }: { car: CarData }) => (
   <div className="relative md:w-1/3">
@@ -28,14 +24,6 @@ const CarImage = ({ car }: { car: CarData }) => (
         className="object-cover"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
       />
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute right-2 top-2 h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm"
-      >
-        <Heart className="h-4 w-4" />
-        <span className="sr-only">Add to favorites</span>
-      </Button>
       <div className="absolute left-2 top-2">
         <PriceRatingIndicator rating={car.priceRating} />
       </div>
@@ -96,7 +84,7 @@ const FeatureBadges = ({ features }: { features: string[] }) => (
   </div>
 );
 
-export function ListViewCard({ car }: ListViewCardProps) {
+export function ListViewCard({ car }: { car: CarData }) {
   const url = `${APP_ROUTES.CARS}/${generateCarSlug(car)}`;
 
   return (

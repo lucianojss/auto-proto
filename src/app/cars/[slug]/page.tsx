@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getCarIdFromSlug } from "@/utils/slugs";
 import { Metadata } from "next";
 import { CarDetailContent } from "@/components/car-detail-content";
+import { APP_ROUTES } from "@/lib/routes";
 
 /**
  * Params type for the car detail page.
@@ -18,12 +19,11 @@ interface CarDetailPageProps {
 }
 
 /**
- * Generates metadata on the server side for the car detail page.
- * This function fetches the car data based on the slug from the URL,
- * constructs the title and description, and returns a Metadata object
- * that includes Open Graph and Twitter card information.
- * @param param0 - The parameters object containing the slug.
+ * Generates SEO metadata for the car detail page.
+ * It fetches the car data based on the slug from the URL parameters,
+ * and constructs the metadata for the page.
  *
+ * @param param0 - The parameters object containing the slug.
  * @returns {Promise<Metadata>}
  */
 export async function generateMetadata({
@@ -41,7 +41,7 @@ export async function generateMetadata({
     title: `AutoSearch | ${title}`,
     description: `${description}`,
     alternates: {
-      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/cars/${slug}`,
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}${APP_ROUTES.CARS}/${slug}`,
     },
     robots: {
       index: true,

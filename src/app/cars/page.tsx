@@ -19,6 +19,10 @@ interface HomePageProps {
   searchParams: searchParams;
 }
 
+/**
+ * Generates SEO metadata for the cars page.
+ * @returns An object containing the title and description for the page.
+ */
 export async function generateMetadata(): Promise<{
   title: string;
   description: string;
@@ -58,59 +62,39 @@ export default async function Home({ searchParams }: HomePageProps) {
         </div>
       </div>
 
-      {cars.length > 0 ? (
-        <>
-          <div className="flex flex-col gap-6 pt-8">
-            {cars.map((car) => (
-              <ListViewCard key={car.id} car={car} />
+      <div className="flex flex-col gap-6 pt-8">
+        {cars.map((car) => (
+          <ListViewCard key={car.id} car={car} />
+        ))}
+      </div>
+      <div className="mt-8">
+        <Pagination>
+          <PaginationContent>
+            {pageNumber > 1 && (
+              <PaginationItem>
+                <PaginationPrevious
+                  href={createPaginationUrl(pageNumber - 1)}
+                />
+              </PaginationItem>
+            )}
+            {Array.from({ length: metadata.totalPages }).map((_, index) => (
+              <PaginationItem key={index + 1}>
+                <PaginationLink
+                  href={createPaginationUrl(index + 1)}
+                  isActive={pageNumber === index + 1}
+                >
+                  {index + 1}
+                </PaginationLink>
+              </PaginationItem>
             ))}
-          </div>
-          <div className="mt-8">
-            <Pagination>
-              <PaginationContent>
-                {pageNumber > 1 && (
-                  <PaginationItem>
-                    <PaginationPrevious
-                      href={createPaginationUrl(pageNumber - 1)}
-                    />
-                  </PaginationItem>
-                )}
-                {Array.from({ length: metadata.totalPages }).map((_, index) => (
-                  <PaginationItem key={index + 1}>
-                    <PaginationLink
-                      href={createPaginationUrl(index + 1)}
-                      isActive={pageNumber === index + 1}
-                    >
-                      {index + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                {pageNumber < metadata.totalPages && (
-                  <PaginationItem>
-                    <PaginationNext
-                      href={createPaginationUrl(pageNumber + 1)}
-                    />
-                  </PaginationItem>
-                )}
-              </PaginationContent>
-            </Pagination>
-          </div>
-        </>
-      ) : (
-        <div className="flex flex-col items-center justify-center py-16">
-          <div className="text-center">
-            <p className="text-muted-foreground mb-4">
-              No cars match your current filters.
-            </p>
-            <Button asChild>
-              <Link href="/">
-                <X className="mr-2 h-4 w-4" />
-                Clear all filters
-              </Link>
-            </Button>
-          </div>
-        </div>
-      )}
+            {pageNumber < metadata.totalPages && (
+              <PaginationItem>
+                <PaginationNext href={createPaginationUrl(pageNumber + 1)} />
+              </PaginationItem>
+            )}
+          </PaginationContent>
+        </Pagination>
+      </div>
     </section>
   );
 }
